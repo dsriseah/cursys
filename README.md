@@ -29,28 +29,38 @@ A Node.js TypeScript application with HTTP server and WebSocket support, built w
 4. **Open in browser**
    Visit `http://localhost:3000`
 
+## Quick Demo
+
+For a quick demonstration, you can use the `curs` command:
+
+```bash
+./curs
+```
+
+This will build all components and start the server in one command.
+
 ## Development
 
 ### Build Commands
 - **Development with live reload**: `npm run dev` (builds everything, starts server, and enables live reload)
-- **Build server only**: `npm run build:server`
-- **Build client only**: `npm run build:client`
-- **Build library client**: `npm run build:lib-client`
-- **Build library server**: `npm run build:lib-server`
+- **Build node server only**: `npm run build:node`
+- **Build web client only**: `npm run build:web`
+- **Build web library**: `npm run build:lib-web`
+- **Build node library**: `npm run build:lib-node`
 - **Copy assets**: `npm run copy-assets`
 - **Start production server**: `npm start`
 
 ### Live Reload
 The project includes built-in live reload functionality:
-- **File watching**: Uses chokidar to monitor `src/client/` and `src-lib/lib-client.ts`
+- **File watching**: Uses chokidar to monitor `src/web/` and `src-lib/lib-web.ts`
 - **WebSocket-based**: Uses Socket.IO for real-time communication
-- **Automatic rebuild**: Parcel rebuilds client files when changes are detected
+- **Automatic rebuild**: Parcel rebuilds web files when changes are detected
 - **Browser refresh**: Automatically refreshes the browser after rebuild
 
 To use live reload:
 1. Run `npm run dev`
 2. Open `http://localhost:3000` in your browser
-3. Make changes to client files (TypeScript, HTML, CSS)
+3. Make changes to web files (TypeScript, HTML, CSS)
 4. Browser will automatically refresh with your changes
 
 **Note**: Live reload is automatically enabled in development mode (when `NODE_ENV` is not 'production').
@@ -59,13 +69,13 @@ To use live reload:
 
 ```
 src/
-├── server/          # Express server with Socket.IO
-├── client/          # Browser client with Socket.IO
-└── shared/          # Shared TypeScript interfaces
+├── node/            # Express server with Socket.IO
+├── web/             # Browser client with Socket.IO
+└── common/          # Shared TypeScript interfaces
 src-lib/
-├── lib-client.ts    # Client library exports
-└── lib-server.ts    # Server library exports
-src-assets/          # Static assets (copied to client build)
+├── lib-web.ts       # Web library exports
+└── lib-node.ts      # Node library exports
+src-assets/          # Static assets (copied to web build)
 _dist/               # Built files (gitignored)
 _support/            # Deployment configurations (nginx.conf)
 ```
@@ -74,7 +84,7 @@ The server runs on port 3000 and serves both HTTP and WebSocket connections via 
 
 ## Architecture
 
-- **Full-stack TypeScript** with shared types between client and server
+- **Full-stack TypeScript** with shared types between web and node
 - **Express.js server** serving static files and handling WebSocket connections
 - **Socket.IO** for real-time bidirectional communication
 - **Parcel bundler** with multiple build targets
@@ -91,23 +101,23 @@ npm install github:dsri/cursys
 ### Usage
 
 ```javascript
-// Client library (ES modules)
-import { clientVersion } from 'cursys/client';
+// Web library (ES modules)
+import { clientVersion } from 'cursys/web';
 
-// Server library (CommonJS)
-const { serverVersion } = require('cursys/server');
+// Node library (CommonJS)
+const { serverVersion } = require('cursys/node');
 
 // Default import (auto-detects module system)
 import pkg from 'cursys';
 ```
 
-Full TypeScript support is included with separate type definitions for client and server.
+Full TypeScript support is included with separate type definitions for web and node.
 
 ## Deployment
 
 ### Development
 - Runs on `http://localhost:3000`
-- Hot reload with Parcel development server
+- Custom development server with built-in live reload
 - Direct file serving from `_dist/`
 
 ### Production
