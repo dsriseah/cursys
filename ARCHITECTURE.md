@@ -34,19 +34,21 @@ Cursys follows a **full-stack TypeScript architecture** with shared code between
 - **Protocol**: WebSocket with HTTP fallback
 - **Message Format**: Structured JSON with type system
 - **Connection Management**: Automatic reconnection and event handling
+- **Live Reload**: Custom reload system using WebSocket events
 
 ### HTTP Layer
 - **Framework**: Express.js
 - **Static Serving**: Built client files from `_dist/client/`
 - **SPA Routing**: Catch-all route serving `index.html`
 - **API Ready**: Express middleware stack for future REST endpoints
+- **Cache Control**: Development mode includes no-cache headers
 
 ## Deployment Architecture
 
 ### Development
 - **Port**: 3000 (configurable via `PORT` env var)
-- **Hot Reload**: Parcel development server
-- **Asset Serving**: Direct file serving from `_dist/`
+- **Live Reload**: Chokidar file watching with automatic rebuild
+- **Asset Serving**: Direct file serving from `_dist/` with cache-busting
 
 ### Production
 - **Reverse Proxy**: Nginx with SSL termination
@@ -76,6 +78,18 @@ Cursys follows a **full-stack TypeScript architecture** with shared code between
 - **Connection Status**: Real-time client connection tracking
 - **Message History**: Timestamped message logging
 - **Client Registry**: Active client management with metadata
+
+## Development Workflow
+
+### Live Reload System
+- **File Watching**: Chokidar v4 monitors `src/client/` and `src-lib/lib-client.ts` directly in the server
+- **Auto-Rebuild**: Parcel rebuilds client files on changes via child process execution
+- **WebSocket Notification**: Server emits 'reload' event to all connected clients
+- **Browser Refresh**: Client automatically refreshes page on reload event
+- **Development Command**: `npm run dev` starts server with live reload enabled
+- **Cross-Platform**: Chokidar provides reliable file watching across all operating systems
+- **No Glob Support**: Chokidar v4 requires direct paths (no `**/*` patterns)
+- **Error Handling**: Build errors are logged but don't crash the server
 
 ## Scalability Considerations
 - **Stateless Design**: No server-side session storage

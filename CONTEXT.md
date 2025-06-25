@@ -1,7 +1,7 @@
-# Cursys - Project Context
+# CURSYS - Project Context
 
 ## Overview
-Cursys is a Node.js TypeScript application with HTTP server and WebSocket support, built with Parcel bundler. It's designed to be both a standalone application and installable as a library.
+CURSYS is a Node.js TypeScript application with HTTP server and WebSocket support, built with Parcel bundler. It's designed to be both a standalone application and installable as a library.
 
 ## Architecture
 - **Full-stack TypeScript**: Shared types between client and server
@@ -27,15 +27,19 @@ Cursys is a Node.js TypeScript application with HTTP server and WebSocket suppor
 - Connection status display in browser
 - Server serves static files and SPA routing
 - Library exports for both client (ES modules) and server (CommonJS)
+- **Live reload system** with chokidar file watching and automatic browser refresh
 
 ## Development Context
 - Node.js 18.17.0 required
 - Runs on port 3000 by default
 - WebSocket messages use `WebSocketMessage` interface with type, data, and timestamp
 - Client tracking includes `ClientInfo` with id, connection time, and user agent
+- **Live reload**: Automatic file watching, rebuild, and browser refresh in development
 
 ## Known Patterns
 - Shared version tracking between client and server libraries
 - Socket.IO for real-time communication
 - Express static file serving with SPA fallback routing
-- TypeScript interfaces for type safety across client/server boundary 
+- TypeScript interfaces for type safety across client/server boundary
+- **Chokidar v4** for cross-platform file watching (no glob support)
+- **Cache-busting headers** in development to prevent browser caching 

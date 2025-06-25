@@ -1,4 +1,4 @@
-// Shared types between client and server
+// Common types between web and node
 
 export interface WebSocketMessage {
   type: string;
