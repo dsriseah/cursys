@@ -37,7 +37,7 @@ CURSYS is an experimental clone of URSYS, built with modern TypeScript tooling. 
 ### 6. Deployment
 - **Development**: Custom server with live reload on port 3000
 - **Production**: Nginx reverse proxy with WebSocket support
-- **Static serving**: Direct file serving from `_dist/` directory
+- **Static serving**: Direct file serving from `_out/` directory
 
 ## Key Technologies
 - **TypeScript**: Full-stack type safety

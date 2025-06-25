@@ -1,37 +1,25 @@
-#!/bin/sh
+#!/bin/bash
 
 # Build script for CURSYS
 # POSIX compatible shell script
 
 set -e  # Exit on any error
 
-echo "  Building CURSYS...  " | sed 's/.*/\x1b[44;97m&\x1b[0m/'
+echo -e "\033[44;97mBuilding CURSYS...\033[0m"
 
-# Build web library
-echo "Building web library..."
-npx tsup src-lib/lib-web.ts --format esm --outDir _dist/lib-web --target es2020 --dts
+# Build libraries
+npx tsup --config tsup.lib.config.ts
 
-# Build node library
-echo "Building node library..."
-npx tsup src-lib/lib-node.ts --format cjs --outDir _dist/lib-node --target node18 --dts
+# Build application (server and web app)
+npx tsup --config tsup.app.config.ts
 
-# Build node server
-echo "Building node server..."
-npx tsup src/node/serve.ts --format cjs --outDir _dist/node --target node18 --dts
-
-# Copy assets to web directory
+# Copy assets if they exist
 echo "Copying assets..."
-if [ -d "src-assets" ]; then
-    cp -r src-assets/* src/web/ 2>/dev/null || true
-else
-    echo "src-assets directory not found, skipping asset copy"
-fi
+cp -r src-assets/* src/web/ 2>/dev/null || true
+cp src/web/index.html _out/web/
 
-# Build web client
-echo "Building web client..."
-npx tsup src/web/main.ts --format esm --outDir _dist/web --target es2020 --dts
-cp src/web/index.html _dist/web/
+echo -e "\033[42;97mBuild complete!\033[0m"
 
-echo "Build complete!"
+# Start server
 echo "Starting server..."
-node _dist/node/serve.js 
+node _out/node/serve.js 

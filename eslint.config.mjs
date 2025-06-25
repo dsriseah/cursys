@@ -63,7 +63,7 @@ export default [
       import: importPlugin
     },
     rules: RULES,
-    ignores: ['**/_dist/*', '**/_out/*', '**/node_modules/*'],
+    ignores: ['**/_out/*', '**/node_modules/*'],
     settings: {
       react: {
         version: 'detect'

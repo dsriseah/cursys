@@ -66,7 +66,7 @@ npm run dev
 - **Express.js**: HTTP server with static file serving
 - **WebSocket support**: Native WebSocket upgrade handling
 - **SPA routing**: Fallback to index.html for client-side routing
-- **Static assets**: Direct serving from `_dist/web/`
+- **Static assets**: Direct serving from `_out/web/`
 
 ### 2. Nginx Configuration
 - **Reverse proxy**: Forward requests to Node.js application

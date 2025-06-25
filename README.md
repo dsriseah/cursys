@@ -72,16 +72,17 @@ To use live reload:
 ### Project Structure
 
 ```
-src/
-├── node/            # Express server with WebSocket support
-├── web/             # Browser client with WebSocket support
-└── common/          # Shared TypeScript interfaces
-src-lib/
-├── lib-web.ts       # Web library exports
-└── lib-node.ts      # Node library exports
-src-assets/          # Static assets (copied to web build)
-_dist/               # Built files (gitignored)
-_support/            # Deployment configurations (nginx.conf)
+cursys/
+├── src/
+│   ├── common/          # Shared types and utilities
+│   ├── node/            # Server-side code
+│   └── web/             # Client-side code
+├── src-lib/             # Library source files
+├── src-assets/          # Static assets
+├── _out/                # Built files (gitignored)
+├── _exports/            # Library exports for npm package
+├── curs                 # Build script
+└── package.json
 ```
 
 The server runs on port 3000 and serves both HTTP and WebSocket connections.
@@ -122,23 +123,57 @@ Full TypeScript support is included with separate type definitions for web and n
 ### Development
 - Runs on `http://localhost:3000`
 - Custom development server with built-in live reload
-- Direct file serving from `_dist/`
+- **Static serving**: Direct file serving from `_out/`
 
 ### Production
-- Nginx reverse proxy configuration in `_support/nginx.conf`
-- SSL termination and security headers
-- WebSocket support through proxy upgrade headers
-- Path routing with `/app` prefix
+- Nginx reverse proxy configuration in `
 
-## Appendix: Installing nvm
+## Project Structure
 
-If you don't have nvm installed, run:
-
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+```
+cursys/
+├── src/
+│   ├── common/          # Shared types and utilities
+│   ├── node/            # Server-side code
+│   └── web/             # Client-side code
+├── src-lib/             # Library source files
+├── src-assets/          # Static assets
+├── _out/                # Built files (gitignored)
+├── _exports/            # Library exports for npm package
+├── curs                 # Build script
+└── package.json
 ```
 
-Then:
-1. Restart your terminal or run: `source ~/.bashrc`
-2. Install Node.js: `nvm install 18.17.0`
-3. Use Node.js: `nvm use 18.17.0` 
+## Installation
+
+### Development
+```bash
+git clone https://github.com/dsriseah/cursys.git
+cd cursys
+npm install
+npm run dev
+```
+
+### As a Package
+```bash
+npm install dsriseah/cursys
+```
+
+## Usage
+
+### Development
+- **Quick start**: `./curs` - Builds and starts the development server
+- **Manual build**: `npm run dev` - Full development build with live reload
+- **Server only**: `npm run build:node && npm start`
+
+### As a Library
+```javascript
+// ESM import (browser/Node.js)
+import { clientVersion } from 'cursys/web';
+
+// CommonJS require (Node.js)
+const { serverVersion } = require('cursys/node');
+
+// Default import (Node.js)
+const cursys = require('cursys');
+```

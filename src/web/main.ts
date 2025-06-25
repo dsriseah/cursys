@@ -16,14 +16,14 @@ socket.onclose = () => {
   statusElement.style.color = 'red';
 };
 
-socket.onerror = (error) => {
+socket.onerror = error => {
   console.error('WebSocket error:', error);
   statusElement.textContent = 'Error';
   statusElement.style.color = 'red';
 };
 
 // Live reload functionality
-socket.onmessage = (event) => {
+socket.onmessage = event => {
   if (event.data === 'reload') {
     console.log('Live reload triggered');
     window.location.reload();
@@ -31,4 +31,4 @@ socket.onmessage = (event) => {
 };
 
 console.log('Client library version:', clientVersion);
-console.log('Testing chokidar file detection! 🚀'); 
+console.log('Testing chokidar file detection!!!');

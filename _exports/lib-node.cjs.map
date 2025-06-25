@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src-lib/lib-node.ts"],"sourcesContent":["// Node library stub\nexport const serverVersion = '1.0.0'; "],"mappings":";;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AACO,IAAM,gBAAgB;","names":[]}
