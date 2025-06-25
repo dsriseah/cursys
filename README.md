@@ -1,6 +1,7 @@
-# Cursys
+# CURSYS
+_experimental ursys clone made with cursor ai_
 
-A Node.js TypeScript application with HTTP server and WebSocket support, built with Parcel.
+A Node.js TypeScript application with HTTP server and WebSocket support, built with Parcel. Designed to be both a standalone application and installable as a library.
 
 ## Prerequisites
 
@@ -11,7 +12,7 @@ A Node.js TypeScript application with HTTP server and WebSocket support, built w
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/dsriseah/cursys.git
    cd cursys
    ```
 
@@ -30,30 +31,46 @@ A Node.js TypeScript application with HTTP server and WebSocket support, built w
 
 ## Development
 
-- **Build server**: `npm run build:server`
-- **Build client**: `npm run build:client`
-- **Build both**: `npm run build`
-- **Start server**: `npm start`
+### Build Commands
+- **Full development build**: `npm run dev` (builds everything and starts server)
+- **Build server only**: `npm run build:server`
+- **Build client only**: `npm run build:client`
+- **Build library client**: `npm run build:lib-client`
+- **Build library server**: `npm run build:lib-server`
+- **Copy assets**: `npm run copy-assets`
+- **Start production server**: `npm start`
 
-## Project Structure
+### Project Structure
 
 ```
 src/
-├── server/          # Server-side TypeScript
-├── client/          # Client-side TypeScript
-└── shared/          # Shared types
+├── server/          # Express server with Socket.IO
+├── client/          # Browser client with Socket.IO
+└── shared/          # Shared TypeScript interfaces
+src-lib/
+├── lib-client.ts    # Client library exports
+└── lib-server.ts    # Server library exports
+src-assets/          # Static assets (copied to client build)
 _dist/               # Built files (gitignored)
-_support/            # Deployment configurations
+_support/            # Deployment configurations (nginx.conf)
 ```
 
-The server runs on port 3000 and serves both HTTP and WebSocket connections.
+The server runs on port 3000 and serves both HTTP and WebSocket connections via Socket.IO.
+
+## Architecture
+
+- **Full-stack TypeScript** with shared types between client and server
+- **Express.js server** serving static files and handling WebSocket connections
+- **Socket.IO** for real-time bidirectional communication
+- **Parcel bundler** with multiple build targets
+- **Single Page Application** with client-side routing
 
 ## Installing as a Library
 
 You can install this project as a library from GitHub:
 
 ```bash
-npm install github:username/cursys
+npm install github:dsri/cursys
 ```
 
 ### Usage
@@ -69,7 +86,20 @@ const { serverVersion } = require('cursys/server');
 import pkg from 'cursys';
 ```
 
-Full TypeScript support is included.
+Full TypeScript support is included with separate type definitions for client and server.
+
+## Deployment
+
+### Development
+- Runs on `http://localhost:3000`
+- Hot reload with Parcel development server
+- Direct file serving from `_dist/`
+
+### Production
+- Nginx reverse proxy configuration in `_support/nginx.conf`
+- SSL termination and security headers
+- WebSocket support through proxy upgrade headers
+- Path routing with `/app` prefix
 
 ## Installing nvm
 
