@@ -10,11 +10,11 @@ const io = new Server(server);
 const PORT = process.env.PORT || 3000;
 
 // Serve static files from the built client
-app.use(express.static(path.join(process.cwd(), 'dist/client')));
+app.use(express.static(path.join(process.cwd(), '_dist/client')));
 
 // Serve the main HTML file for all routes (SPA)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'dist/client/index.html'));
+  res.sendFile(path.join(process.cwd(), '_dist/client/index.html'));
 });
 
 // WebSocket connection handling

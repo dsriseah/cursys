@@ -2,12 +2,12 @@
   "name": "cursor-jason-demo",
   "version": "1.0.0",
   "description": "Node.js TypeScript app server with HTTP and WebSocket support",
-  "main": "dist/server/index.js",
+  "main": "_dist/server/index.js",
   "scripts": {
     "dev": "npm run build:server && npm run build:client && npm start",
     "build:server": "parcel build src/server/index.ts --target server",
     "build:client": "parcel build src/client/index.html --target client",
-    "start": "node dist/server/index.js"
+    "start": "node _dist/server/index.js"
   },
   "keywords": [],
   "author": "",
@@ -28,12 +28,12 @@
       "context": "node",
       "includeNodeModules": true,
       "outputFormat": "commonjs",
-      "distDir": "dist/server",
+      "distDir": "_dist/server",
       "sourceMap": true
     },
     "client": {
       "context": "browser",
-      "distDir": "dist/client",
+      "distDir": "_dist/client",
       "publicUrl": "/"
     }
   }

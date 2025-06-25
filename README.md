@@ -42,7 +42,8 @@ src/
 ├── server/          # Server-side TypeScript
 ├── client/          # Client-side TypeScript
 └── shared/          # Shared types
-dist/                # Built files (gitignored)
+_dist/               # Built files (gitignored)
+_support/            # Deployment configurations
 ```
 
 The server runs on port 3000 and serves both HTTP and WebSocket connections.
