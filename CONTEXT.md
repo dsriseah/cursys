@@ -1,45 +1,48 @@
-# CURSYS - Project Context
+# CURSYS Context
 
-## Overview
-CURSYS is a Node.js TypeScript application with HTTP server and WebSocket support, built with Parcel bundler. It's designed to be both a standalone application and installable as a library.
+## Project Overview
+CURSYS is an experimental clone of URSYS, built with modern TypeScript tooling. It's designed as both a standalone application and an installable library for real-time web applications.
 
-## Architecture
-- **Full-stack TypeScript**: Shared types between client and server
-- **Express.js server**: Serves static files and handles WebSocket connections via Socket.IO
-- **Single Page Application**: Client-side TypeScript with Socket.IO client
-- **Library packaging**: Can be installed as npm package with separate client/server exports
+## Architecture Overview
 
-## Key Components
-- `src/server/` - Express server with Socket.IO WebSocket support
-- `src/client/` - Browser-based client with Socket.IO connection
-- `src/shared/` - TypeScript interfaces shared between client/server
-- `src-lib/` - Library code for client and server exports
-- `_dist/` - Built output (gitignored)
+### 1. Platform-Based Structure
+- **`src/web/`**: Browser client with WebSocket support
+- **`src/node/`**: Express server with WebSocket support  
+- **`src/common/`**: Shared TypeScript interfaces
+- **`src-lib/`**: Library exports for web and node platforms
 
-## Build System
-- **Parcel bundler** with multiple targets (server, client, lib-client, lib-server)
-- **TypeScript** compilation with source maps
-- **Asset copying** from `src-assets/` to client build
+### 2. Build System
+- **tsup bundler** with multiple build targets
+- **Automatic type generation** (`.d.ts` files)
+- **Asset copying** from `src-assets/` to web build
 - **Development workflow**: `npm run dev` builds everything and starts server
 
-## Current State
-- Basic WebSocket connection between client and server
-- Connection status display in browser
-- Server serves static files and SPA routing
-- Library exports for both client (ES modules) and server (CommonJS)
-- **Live reload system** with chokidar file watching and automatic browser refresh
-
-## Development Context
-- Node.js 18.17.0 required
-- Runs on port 3000 by default
-- WebSocket messages use `WebSocketMessage` interface with type, data, and timestamp
-- Client tracking includes `ClientInfo` with id, connection time, and user agent
+### 3. Communication Layer
+- **Native WebSocket** for real-time bidirectional communication
+- **Express.js server** serving static files and handling WebSocket connections
 - **Live reload**: Automatic file watching, rebuild, and browser refresh in development
 
-## Known Patterns
-- Shared version tracking between client and server libraries
-- Socket.IO for real-time communication
-- Express static file serving with SPA fallback routing
-- TypeScript interfaces for type safety across client/server boundary
-- **Chokidar v4** for cross-platform file watching (no glob support)
-- **Cache-busting headers** in development to prevent browser caching 
+### 4. Library Structure
+- **Web library**: ESM format for browser consumption
+- **Node library**: CommonJS format for server consumption
+- **Package exports**: Subpath exports for platform-specific imports
+- **TypeScript support**: Full type definitions included
+
+### 5. Development Workflow
+- **Fast builds**: tsup provides 35x faster builds than Parcel
+- **Live reload**: Automatic file watching, rebuild, and browser refresh in development
+- **Type safety**: Full TypeScript support across all platforms
+- **Hot reload**: WebSocket-based live reload system
+
+### 6. Deployment
+- **Development**: Custom server with live reload on port 3000
+- **Production**: Nginx reverse proxy with WebSocket support
+- **Static serving**: Direct file serving from `_dist/` directory
+
+## Key Technologies
+- **TypeScript**: Full-stack type safety
+- **Express.js**: HTTP server and static file serving
+- **Native WebSocket**: Real-time communication
+- **tsup**: Fast TypeScript bundling with automatic type generation
+- **chokidar**: File watching for live reload
+- **Node.js**: Server runtime environment 

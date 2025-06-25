@@ -1,7 +1,7 @@
 # CURSYS
 _experimental ursys clone made with cursor ai_
 
-A Node.js TypeScript application with HTTP server and WebSocket support, built with Parcel. Designed to be both a standalone application and installable as a library.
+A Node.js TypeScript application with HTTP server and WebSocket support, built with tsup. Designed to be both a standalone application and installable as a library.
 
 ## Prerequisites
 
@@ -43,6 +43,7 @@ This will build all components and start the server in one command.
 
 ### Build Commands
 - **Development with live reload**: `npm run dev` (builds everything, starts server, and enables live reload)
+- **Build all**: `npm run build` (builds everything with tsup)
 - **Build node server only**: `npm run build:node`
 - **Build web client only**: `npm run build:web`
 - **Build web library**: `npm run build:lib-web`
@@ -53,8 +54,8 @@ This will build all components and start the server in one command.
 ### Live Reload
 The project includes built-in live reload functionality:
 - **File watching**: Uses chokidar to monitor `src/web/` and `src-lib/lib-web.ts`
-- **WebSocket-based**: Uses Socket.IO for real-time communication
-- **Automatic rebuild**: Parcel rebuilds web files when changes are detected
+- **WebSocket-based**: Uses native WebSocket for real-time communication
+- **Automatic rebuild**: tsup rebuilds web files when changes are detected
 - **Browser refresh**: Automatically refreshes the browser after rebuild
 
 To use live reload:
@@ -69,8 +70,8 @@ To use live reload:
 
 ```
 src/
-├── node/            # Express server with Socket.IO
-├── web/             # Browser client with Socket.IO
+├── node/            # Express server with WebSocket support
+├── web/             # Browser client with WebSocket support
 └── common/          # Shared TypeScript interfaces
 src-lib/
 ├── lib-web.ts       # Web library exports
@@ -80,14 +81,14 @@ _dist/               # Built files (gitignored)
 _support/            # Deployment configurations (nginx.conf)
 ```
 
-The server runs on port 3000 and serves both HTTP and WebSocket connections via Socket.IO.
+The server runs on port 3000 and serves both HTTP and WebSocket connections.
 
 ## Architecture
 
 - **Full-stack TypeScript** with shared types between web and node
 - **Express.js server** serving static files and handling WebSocket connections
-- **Socket.IO** for real-time bidirectional communication
-- **Parcel bundler** with multiple build targets
+- **Native WebSocket** for real-time bidirectional communication
+- **tsup bundler** with multiple build targets and automatic type generation
 - **Single Page Application** with client-side routing
 
 ## Installing as a Library

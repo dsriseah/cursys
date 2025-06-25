@@ -1,13 +1,13 @@
 import express from 'express';
 import { createServer } from 'http';
-import { Server } from 'socket.io';
+import { WebSocketServer } from 'ws';
 import path from 'path';
 import chokidar from 'chokidar';
 import { serverVersion } from '../../src-lib/lib-node';
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const wss = new WebSocketServer({ server });
 
 const PORT = process.env.PORT || 3000;
 const isDevelopment = process.env.NODE_ENV !== 'production';
@@ -31,11 +31,11 @@ app.get('*', (req, res) => {
 });
 
 // WebSocket connection handling
-io.on('connection', (socket) => {
-  console.log('Web client connected:', socket.id);
+wss.on('connection', (ws) => {
+  console.log('Web client connected');
   
-  socket.on('disconnect', () => {
-    console.log('Web client disconnected:', socket.id);
+  ws.on('close', () => {
+    console.log('Web client disconnected');
   });
 });
 
@@ -65,7 +65,7 @@ if (isDevelopment) {
       console.log(`File changed: ${filePath}`);
       console.log('Rebuilding web files...');
       
-      // Trigger Parcel rebuild
+      // Trigger tsup rebuild
       const { exec } = require('child_process');
       exec('npm run build:web', (error: any, stdout: any, stderr: any) => {
         if (error) {
@@ -73,7 +73,12 @@ if (isDevelopment) {
           return;
         }
         console.log('Build completed, triggering live reload...');
-        io.emit('reload');
+        // Send reload message to all connected clients
+        wss.clients.forEach((client) => {
+          if (client.readyState === 1) { // WebSocket.OPEN
+            client.send('reload');
+          }
+        });
       });
     })
     .on('error', (error) => {

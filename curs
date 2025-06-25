@@ -9,15 +9,15 @@ echo "  Building CURSYS...  " | sed 's/.*/\x1b[44;97m&\x1b[0m/'
 
 # Build web library
 echo "Building web library..."
-npx parcel build src-lib/lib-web.ts --target lib-web
+npx tsup src-lib/lib-web.ts --format esm --outDir _dist/lib-web --target es2020 --dts
 
 # Build node library
 echo "Building node library..."
-npx parcel build src-lib/lib-node.ts --target lib-node
+npx tsup src-lib/lib-node.ts --format cjs --outDir _dist/lib-node --target node18 --dts
 
 # Build node server
 echo "Building node server..."
-npx parcel build src/node/serve.ts --target node
+npx tsup src/node/serve.ts --format cjs --outDir _dist/node --target node18 --dts
 
 # Copy assets to web directory
 echo "Copying assets..."
@@ -29,7 +29,8 @@ fi
 
 # Build web client
 echo "Building web client..."
-npx parcel build src/web/index.html --target web
+npx tsup src/web/main.ts --format esm --outDir _dist/web --target es2020 --dts
+cp src/web/index.html _dist/web/
 
 echo "Build complete!"
 echo "Starting server..."
