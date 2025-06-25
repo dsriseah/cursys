@@ -17,7 +17,10 @@ A Node.js TypeScript application with HTTP server and WebSocket support, built w
    ```
 
 2. **Install dependencies**
+
+   Make sure you have nvm installed (see appendix)
    ```bash
+   nvm use
    npm ci
    ```
 
@@ -127,7 +130,7 @@ Full TypeScript support is included with separate type definitions for web and n
 - WebSocket support through proxy upgrade headers
 - Path routing with `/app` prefix
 
-## Installing nvm
+## Appendix: Installing nvm
 
 If you don't have nvm installed, run:
 
