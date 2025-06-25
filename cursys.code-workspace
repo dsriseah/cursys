@@ -1,8 +1,108 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {}
+  // enable whitespace rendering by default
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    // configure glob patterns for excluding files and folders.
+    "files.exclude": {
+      "**/.git": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/package-lock.json": true
+    },
+    // highlight sri-style ursys module comment separators
+    "highlight.regexes": {
+      "(/// [^/]+? ///+)\n": [
+        {
+          "color": "#a3bdff",
+          "backgroundColor": "#2E4AE06f"
+        }
+      ]
+    },
+    "workbench.colorCustomizations": {
+      // make errors more obvious, de-emphasize warnings
+      "editorError.border": "#ff0000"
+      // color customizations for the title bar
+      //   "titleBar.activeBackground": "#343e99",
+      //   "titleBar.inactiveBackground": "#343e9940",
+      //   "titleBar.inactiveForeground": "#ffffff40"
+    },
+    // other theme overrides
+    "editor.tokenColorCustomizations": {},
+    // langauge specific overrides
+    "[javascript]": {
+      "editor.renderWhitespace": "all",
+      "editor.detectIndentation": true,
+      "editor.insertSpaces": true,
+      "editor.tabSize": 2
+    },
+    "[javascriptreact]": {
+      "editor.renderWhitespace": "all",
+      "editor.detectIndentation": true,
+      "editor.insertSpaces": true,
+      "editor.tabSize": 2
+    },
+    "[typescript]": {
+      "editor.renderWhitespace": "all",
+      "editor.detectIndentation": true,
+      "editor.insertSpaces": true,
+      "editor.tabSize": 2
+    },
+    "[typescriptreact]": {
+      "editor.renderWhitespace": "all",
+      "editor.detectIndentation": true,
+      "editor.insertSpaces": true,
+      "editor.tabSize": 2
+    },
+    "terminal.integrated.profiles.osx": {
+      "x86 macos": {
+        "path": "/usr/bin/arch",
+        "args": [
+          "-arch",
+          "x86_64",
+          "${env:SHELL}",
+          "-i",
+          "-c",
+          "export VSCODE_TERM='x86 shell'; [ -f .vscode/vs_env ] && . .vscode/vs_env; exec ${env:SHELL}"
+        ]
+      },
+      "arm64 macos": {
+        "path": "/usr/bin/arch",
+        "args": [
+          "-arch",
+          "arm64",
+          "${env:SHELL}",
+          "-i",
+          "-c",
+          "export VSCODE_TERM='arm64 shell'; cd ${workspaceFolder}; [ -f .vscode/vs_env ] && . .vscode/vs_env; exec ${env:SHELL}"
+        ]
+      },
+      "generic macos": {
+        "path": "${env:SHELL}",
+        "args": [
+          "-i",
+          "-c",
+          "export VSCODE_TERM='generic bash'; cd ${workspaceFolder}; [ -f .vscode/vs_env ] && . .vscode/vs_env; exec ${env:SHELL}"
+        ]
+      }
+    },
+    "terminal.integrated.profiles.linux": {
+      "generic bash": {
+        "path": "/bin/bash",
+        "args": [
+          "-i",
+          "-c",
+          "export VSCODE_TERM='generic bash'; cd ${workspaceFolder}; [ -f .vscode/vs_env ] && . .vscode/vs_env; exec ${env:SHELL}"
+        ]
+      }
+    },
+    // this line will force use of the selected profile
+    // use "x86 macos" to force Rosetta x86 emulation in terminal
+    "terminal.integrated.defaultProfile.osx": "generic macos",
+    "terminal.integrated.defaultProfile.linux": "generic bash"
+  }
 }
