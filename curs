@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# Build script for CURSYS
+# POSIX compatible shell script
+
+set -e  # Exit on any error
+
+echo "  Building CURSYS...  " | sed 's/.*/\x1b[44;97m&\x1b[0m/'
+
+# Build web library
+echo "Building web library..."
+npx parcel build src-lib/lib-web.ts --target lib-web
+
+# Build node library
+echo "Building node library..."
+npx parcel build src-lib/lib-node.ts --target lib-node
+
+# Build node server
+echo "Building node server..."
+npx parcel build src/node/serve.ts --target node
+
+# Copy assets to web directory
+echo "Copying assets..."
+if [ -d "src-assets" ]; then
+    cp -r src-assets/* src/web/ 2>/dev/null || true
+else
+    echo "src-assets directory not found, skipping asset copy"
+fi
+
+# Build web client
+echo "Building web client..."
+npx parcel build src/web/index.html --target web
+
+echo "Build complete!"
+echo "Starting server..."
+node _dist/node/serve.js 
