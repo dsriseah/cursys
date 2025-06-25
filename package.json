@@ -4,9 +4,12 @@
   "description": "Node.js TypeScript app server with HTTP and WebSocket support",
   "main": "_dist/server/index.js",
   "scripts": {
-    "dev": "npm run build:server && npm run build:client && npm start",
+    "dev": "npm run build:lib-client && npm run build:lib-server && npm run build:server && npm run copy-assets && npm run build:client && npm start",
     "build:server": "parcel build src/server/index.ts --target server",
     "build:client": "parcel build src/client/index.html --target client",
+    "build:lib-client": "parcel build src-lib/lib-client.ts --target lib-client",
+    "build:lib-server": "parcel build src-lib/lib-server.ts --target lib-server",
+    "copy-assets": "cp -r src-assets/* src/client/ 2>/dev/null || true",
     "start": "node _dist/server/index.js"
   },
   "keywords": [],
@@ -35,6 +38,18 @@
       "context": "browser",
       "distDir": "_dist/client",
       "publicUrl": "/"
+    },
+    "lib-client": {
+      "context": "browser",
+      "distDir": "_dist/lib-client",
+      "outputFormat": "esmodule"
+    },
+    "lib-server": {
+      "context": "node",
+      "includeNodeModules": true,
+      "outputFormat": "commonjs",
+      "distDir": "_dist/lib-server",
+      "sourceMap": true
     }
   }
 } 
