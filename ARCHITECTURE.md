@@ -127,3 +127,18 @@ npm run dev
 - **Error tracking**: Server error logging and reporting
 - **Performance metrics**: Build time and runtime metrics
 - **Health checks**: Application health monitoring endpoints 
+
+## Build System
+- **Libraries:** Built with `tsup --config tsup.lib.config.ts` to `_exports/` (with types)
+- **Apps:** Built with `tsup --config tsup.app.config.ts` to `_out/` (no types)
+- **Scripts:** Clean, only use config files
+- **Live Reload:** Watches web and library sources, rebuilds app, triggers browser reload
+- **Type Declarations:** Only libraries export types for consumers
+
+## Directory Structure
+- `_exports/` — Library outputs for npm consumers
+- `_out/` — App/server outputs for deployment
+
+## Development
+- Use `npm run build`, `npm run dev`, or `./curs` for full build/start
+- Libraries are always up to date in `_exports/` for npm consumers 

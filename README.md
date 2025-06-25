@@ -69,23 +69,60 @@ To use live reload:
 
 **Note**: Live reload is automatically enabled in development mode (when `NODE_ENV` is not 'production').
 
-### Project Structure
+## Project Structure
 
 ```
 cursys/
-├── src/
-│   ├── common/          # Shared types and utilities
-│   ├── node/            # Server-side code
-│   └── web/             # Client-side code
-├── src-lib/             # Library source files
-├── src-assets/          # Static assets
-├── _out/                # Built files (gitignored)
-├── _exports/            # Library exports for npm package
-├── curs                 # Build script
+├── src/                # Source code
+│   ├── common/         # Shared types/utilities
+│   ├── node/           # Server code
+│   └── web/            # Web app code
+├── src-lib/            # Library source files
+├── src-assets/         # Static assets
+├── _out/               # Built app files (gitignored)
+├── _exports/           # Built library files (for npm consumers)
+├── curs                # Build script
+├── tsup.lib.config.ts  # tsup config for libraries
+├── tsup.app.config.ts  # tsup config for app
+├── tsconfig.web.json   # Web build tsconfig
+├── tsconfig.node.json  # Node build tsconfig
 └── package.json
 ```
 
-The server runs on port 3000 and serves both HTTP and WebSocket connections.
+## Build System
+
+- **Libraries:** Built with `tsup --config tsup.lib.config.ts` to `_exports/` (with type declarations)
+- **Apps:** Built with `tsup --config tsup.app.config.ts` to `_out/` (no type declarations)
+- **Scripts:**
+  - `npm run build:libs` — Build libraries only
+  - `npm run build:app` — Build app only
+  - `npm run build` — Build both
+  - `npm run dev` — Build and start server
+  - `./curs` — Full build and start (POSIX shell script)
+
+## Usage
+
+### As a Library
+```js
+// ESM (browser)
+import { clientVersion } from 'cursys/web';
+// Node.js (CJS or ESM)
+const { serverVersion } = require('cursys/node');
+// or
+import { serverVersion } from 'cursys/node';
+```
+
+### As an App
+- Run `npm run build` or `./curs` to build everything
+- Run `npm start` to start the server
+
+## Live Reload
+- The dev server watches `src/web` and `src-lib/lib-web.ts` for changes
+- On change, it rebuilds the app with `npx tsup --config tsup.app.config.ts` and triggers browser reload
+
+## Type Declarations
+- Only libraries in `_exports/` have type declarations for consumers
+- App files are for internal use and do not export types
 
 ## Architecture
 
@@ -127,22 +164,6 @@ Full TypeScript support is included with separate type definitions for web and n
 
 ### Production
 - Nginx reverse proxy configuration in `
-
-## Project Structure
-
-```
-cursys/
-├── src/
-│   ├── common/          # Shared types and utilities
-│   ├── node/            # Server-side code
-│   └── web/             # Client-side code
-├── src-lib/             # Library source files
-├── src-assets/          # Static assets
-├── _out/                # Built files (gitignored)
-├── _exports/            # Library exports for npm package
-├── curs                 # Build script
-└── package.json
-```
 
 ## Installation
 

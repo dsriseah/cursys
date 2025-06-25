@@ -46,3 +46,9 @@ CURSYS is an experimental clone of URSYS, built with modern TypeScript tooling. 
 - **tsup**: Fast TypeScript bundling with automatic type generation
 - **chokidar**: File watching for live reload
 - **Node.js**: Server runtime environment 
+
+- **Libraries:** Built with tsup.lib.config.ts to `_exports/` (with types)
+- **Apps:** Built with tsup.app.config.ts to `_out/` (no types)
+- **Live Reload:** Watches web and library sources, rebuilds app, triggers browser reload
+- **Type Declarations:** Only libraries export types for consumers
+- **Scripts:** All build steps use config files, no CLI overrides
