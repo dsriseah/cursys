@@ -1,5 +1,5 @@
 {
-  "name": "cursor-jason-demo",
+  "name": "cursys",
   "version": "1.0.0",
   "description": "Node.js TypeScript app server with HTTP and WebSocket support",
   "main": "_dist/server/index.js",

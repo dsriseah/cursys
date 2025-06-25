@@ -1,4 +1,4 @@
-# Cursor Jason Demo
+# Cursys
 
 A Node.js TypeScript application with HTTP server and WebSocket support, built with Parcel.
 
@@ -12,7 +12,7 @@ A Node.js TypeScript application with HTTP server and WebSocket support, built w
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd cursor-jason-demo
+   cd cursys
    ```
 
 2. **Install dependencies**
@@ -53,20 +53,20 @@ The server runs on port 3000 and serves both HTTP and WebSocket connections.
 You can install this project as a library from GitHub:
 
 ```bash
-npm install github:username/cursor-jason-demo
+npm install github:username/cursys
 ```
 
 ### Usage
 
 ```javascript
 // Client library (ES modules)
-import { clientVersion } from 'cursor-jason-demo/client';
+import { clientVersion } from 'cursys/client';
 
 // Server library (CommonJS)
-const { serverVersion } = require('cursor-jason-demo/server');
+const { serverVersion } = require('cursys/server');
 
 // Default import (auto-detects module system)
-import pkg from 'cursor-jason-demo';
+import pkg from 'cursys';
 ```
 
 Full TypeScript support is included.
