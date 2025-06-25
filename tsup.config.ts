@@ -5,7 +5,7 @@ export default defineConfig({
     'node/serve': 'src/node/serve.ts',
     'web/main': 'src/web/main.ts',
     'lib-web/lib-web': 'src-lib/lib-web.ts',
-    'lib-node/lib-node': 'src-lib/lib-node.ts',
+    'lib-node/lib-node': 'src-lib/lib-node.ts'
   },
   format: ['cjs', 'esm'],
   target: ['node18', 'es2020'],
@@ -16,5 +16,5 @@ export default defineConfig({
   sourcemap: true,
   minify: false,
   // Bundle dependencies for web builds
-  noExternal: ['socket.io-client'],
+  noExternal: ['socket.io-client']
 }) 

@@ -52,7 +52,7 @@ if (isDevelopment) {
   console.log('Watch paths:', watchPaths);
   
   const watcher = chokidar.watch(watchPaths, {
-    ignored: /(^|[\/\\])\../, // ignore dotfiles
+    ignored: /(^|\/)\../, // ignore dotfiles
     persistent: true
   });
 
