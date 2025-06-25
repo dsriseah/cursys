@@ -5,7 +5,7 @@ A Node.js TypeScript application with HTTP server and WebSocket support, built w
 
 ## Prerequisites
 
-- Node.js 18.17.0 (managed with nvm)
+- nvm
 - npm
 
 ## Quick Start
