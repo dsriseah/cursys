@@ -1,4 +1,5 @@
 import { io } from 'socket.io-client';
+import { clientVersion } from '../../src-lib/lib-client';
 
 const socket = io();
 
@@ -14,4 +15,5 @@ socket.on('disconnect', () => {
   statusElement.style.color = 'red';
 });
 
-console.log('Client application loaded'); 
+console.log('Client application loaded');
+console.log('Client library version:', clientVersion); 

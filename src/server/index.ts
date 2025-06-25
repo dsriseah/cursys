@@ -2,6 +2,7 @@ import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import path from 'path';
+import { serverVersion } from '../../src-lib/lib-server';
 
 const app = express();
 const server = createServer(app);
@@ -28,4 +29,5 @@ io.on('connection', (socket) => {
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  console.log('Server library version:', serverVersion);
 }); 

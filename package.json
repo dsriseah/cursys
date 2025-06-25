@@ -3,6 +3,22 @@
   "version": "1.0.0",
   "description": "Node.js TypeScript app server with HTTP and WebSocket support",
   "main": "_dist/server/index.js",
+  "types": "_dist/lib-server/lib-server.d.ts",
+  "exports": {
+    ".": {
+      "types": "./_dist/lib-server/lib-server.d.ts",
+      "import": "./_dist/lib-client/lib-client.js",
+      "require": "./_dist/lib-server/lib-server.js"
+    },
+    "./client": {
+      "types": "./_dist/lib-client/lib-client.d.ts",
+      "import": "./_dist/lib-client/lib-client.js"
+    },
+    "./server": {
+      "types": "./_dist/lib-server/lib-server.d.ts",
+      "require": "./_dist/lib-server/lib-server.js"
+    }
+  },
   "scripts": {
     "dev": "npm run build:lib-client && npm run build:lib-server && npm run build:server && npm run copy-assets && npm run build:client && npm start",
     "build:server": "parcel build src/server/index.ts --target server",
@@ -12,7 +28,7 @@
     "copy-assets": "cp -r src-assets/* src/client/ 2>/dev/null || true",
     "start": "node _dist/server/index.js"
   },
-  "keywords": [],
+  "keywords": ["typescript", "websocket", "express", "parcel"],
   "author": "",
   "license": "ISC",
   "dependencies": {

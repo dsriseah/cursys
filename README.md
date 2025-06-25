@@ -48,6 +48,29 @@ _support/            # Deployment configurations
 
 The server runs on port 3000 and serves both HTTP and WebSocket connections.
 
+## Installing as a Library
+
+You can install this project as a library from GitHub:
+
+```bash
+npm install github:username/cursor-jason-demo
+```
+
+### Usage
+
+```javascript
+// Client library (ES modules)
+import { clientVersion } from 'cursor-jason-demo/client';
+
+// Server library (CommonJS)
+const { serverVersion } = require('cursor-jason-demo/server');
+
+// Default import (auto-detects module system)
+import pkg from 'cursor-jason-demo';
+```
+
+Full TypeScript support is included.
+
 ## Installing nvm
 
 If you don't have nvm installed, run:
